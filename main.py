@@ -3,10 +3,12 @@
 from machine import Pin
 from time import sleep
 
-connectors = [0, 1, 2, 3, 6, 7]
-pins = []
-for connector in connectors:
-    pins.append(Pin(connector, Pin.OUT))
+
+def createPins(connectors):
+    pins = []
+    for connector in connectors:
+        pins.append(Pin(connector, Pin.OUT))
+    return pins
 
 
 def pinOff(pins):
@@ -18,13 +20,20 @@ def pinOn(pin):
     pin.on()
 
 
+connectors_red = [0, 1, 2, 3, 6, 7]
+connectors_green = [21, 20, 19, 18, 17, 16]
+pins_red = createPins(connectors_red)
+pins_green = createPins(connectors_green)
+
 inc = 1
 index = 0
 
 while True:
-    pinOff(pins)
+    for pins in [pins_red, pins_green]:
+        pinOff(pins)
     sleep(0.5)
-    pinOn(pins[index])
+    for pins in [pins_red, pins_green]:
+        pinOn(pins[index])
     sleep(2)
     index += inc
     if index == 0:
