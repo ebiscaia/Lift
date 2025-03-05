@@ -27,14 +27,3 @@ inc = 1
 index = 0
 
 while True:
-    for pins in [pins_red, pins_green]:
-        pinOff(pins)
-    sleep(0.5)
-    for pins in [pins_red, pins_green]:
-        pinOn(pins[index])
-    sleep(2)
-    index += inc
-    if index == 0:
-        inc *= -1
-    if index == len(pins) - 1:
-        inc *= -1
