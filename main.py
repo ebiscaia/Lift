@@ -20,6 +20,13 @@ def pinOn(pin):
     pin.on()
 
 
+def light_level(pins, level):
+    pinOff(pins)
+    sleep(0.5)
+    pinOn(pins[level])
+    sleep(2)
+
+
 class Lift:
     def __init__(self, level=0, state=0, stops=[]):
         self.level = level
