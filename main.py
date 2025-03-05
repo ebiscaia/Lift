@@ -53,4 +53,5 @@ pins = createPins(connectors)
 inc = 1
 index = 0
 
+lift = Lift(4, 1, [1, 5, 0, 2])
 while True:
