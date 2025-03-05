@@ -71,4 +71,29 @@ inc = 1
 index = 0
 
 lift = Lift(4, 1, [1, 5, 0, 2])
+counter = 0
 while True:
+    while len(lift.stops) > 0:
+        if lift.stops[0] > lift.level:
+            lift.state = 1
+        if lift.stops[0] < lift.level:
+            lift.state = -1
+        if lift.stops[0] == lift.level:
+            lift.state = 0
+            blink_level(pins, lift.level)
+            # create a blink here
+            lift.stops.pop(0)
+            print(lift)
+            continue
+        while lift.level != lift.stops[0]:
+            lift.organiseStops()
+            print(lift.stops)
+            light_level(pins, lift.level)
+            lift.level += lift.state
+            print(lift)
+    if len(lift.stops) == 0:
+        counter += 1
+        blink_level(pins, lift.level)
+    if counter >= 3 and lift.level != 0:
+        lift.stops.append(0)
+        counter = 0
