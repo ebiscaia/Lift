@@ -20,10 +20,8 @@ def pinOn(pin):
     pin.on()
 
 
-connectors_red = [0, 1, 2, 3, 6, 7]
-connectors_green = [21, 20, 19, 18, 17, 16]
-pins_red = createPins(connectors_red)
-pins_green = createPins(connectors_green)
+connectors = [0, 1, 2, 3, 6, 7]
+pins = createPins(connectors)
 
 inc = 1
 index = 0
