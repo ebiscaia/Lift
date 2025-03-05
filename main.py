@@ -27,6 +27,16 @@ def light_level(pins, level):
     sleep(2)
 
 
+def blink_level(pins, level):
+    pinOff(pins)
+    sleep(0.5)
+    for i in range(2):
+        pinOn(pins[level])
+        sleep(0.5)
+        pinOff(pins)
+        sleep(0.5)
+
+
 class Lift:
     def __init__(self, level=0, state=0, stops=[]):
         self.level = level
