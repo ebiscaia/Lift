@@ -2,6 +2,8 @@
 
 from machine import Pin
 from time import sleep
+import network
+import json
 
 
 def createPins(connectors):
@@ -31,6 +33,23 @@ def blink_level(pins, level):
     for i in range(2):
         pinOff(pins)
         sleep(0.5)
+        pinOn(pins[level])
+        sleep(0.5)
+
+
+def connectWifi(ssid, passwd):
+    wlan = network.WLAN(network.STA_IF)
+    wlan.active(True)
+    wlan.connect(ssid, passwd)
+    while not wlan.isconnected():
+        print("Waiting for connection...")
+        sleep(1)
+    print(wlan.ifconfig())
+
+
+def loadJson(file):
+    with open(file) as open_file:
+        return json.load(open_file)
 
 
 class Lift:
@@ -60,6 +79,8 @@ This lift is at level {self.level} and is {state_text[self.state]}
         else:
             self.stops = levels_lower + levels_higher
         print(f"Stops after organising: {self.stops}")
+
+
 connectors = [0, 1, 2, 3, 6, 7]
 pins = createPins(connectors)
 
@@ -67,6 +88,10 @@ inc = 1
 index = 0
 
 lift = Lift(4, 1, [1, 5, 0, 2])
+
+wifi_config = loadJson("wifi.json")
+connectWifi(wifi_config["ssid"], wifi_config["pass"])
+
 counter = 0
 while True:
     while len(lift.stops) > 0:
