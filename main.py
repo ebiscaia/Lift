@@ -28,11 +28,7 @@ def light_level(pins, level):
 
 
 def blink_level(pins, level):
-    pinOff(pins)
-    sleep(0.5)
     for i in range(2):
-        pinOn(pins[level])
-        sleep(0.5)
         pinOff(pins)
         sleep(0.5)
 
